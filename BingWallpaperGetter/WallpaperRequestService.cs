@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using Windows.UI.Notifications;
@@ -108,10 +109,12 @@ namespace BingWallpaperGetter
 
             foreach (string country in Countries)
             {
-                if (AllDownloadedPictures[SelectedDay].Select(item => item.CountryCode == country).Count() == 0)
+                //AllDownloadedPictures[SelectedDay].Select(item => item.CountryCode == country).Count() == 0
+                if (!AllDownloadedPictures[SelectedDay].Select(item => item.CountryCode == country).Any())
                 {
-                    var bingUrlFmt = String.Format(format, SelectedDay, country);
+                    var bingUrlFmt = string.Format(format, SelectedDay, country);
                     var request = WebRequest.Create(bingUrlFmt) as HttpWebRequest;
+                    Debug.Assert(request != null);
                     request.Method = "GET";
                     request.BeginGetResponse(result => ResponseHandler(result, request, country, bingUrlFmt), null);
                 }
@@ -125,12 +128,70 @@ namespace BingWallpaperGetter
         private static void ResponseHandler(IAsyncResult asyncResult, HttpWebRequest request, string myloc,
             string imgUri)
         {
+            HttpWebResponse response;
+            try
+            {
+                response = (HttpWebResponse) request.EndGetResponse(asyncResult);
+            }
+            catch (Exception exception)
+            {
+                IsDownloading = false;
 
+                OnGetOneDayWallpapersProgressEventHandler(new ProgressEventArgs
+                {
+                    IsException = true,
+                    IsComplete = false,
+                    ExceptionInfo = exception.Message,
+                    ProgressValue = 0,
+                    Pictures = null
+                });
+                return;
+            }
+
+            if (request.HaveResponse)
+            {
+                var hotspotList = new List<string>();
+                var imgTitle = "";
+                foreach (var str in response.Headers.AllKeys)
+                {
+                    var str2 = str;
+                    var str3 = response.Headers[str];
+                    if (str2.Contains("Image-Info-Credit"))
+                    {
+                        imgTitle = WebUtility.UrlDecode(str3);
+                    }
+                    else if (str2.Contains("Image-Info-Hotspot-"))
+                    {
+                        var strArray = WebUtility.UrlDecode(str3).Replace(" ", "").Split(new char[] {';'});
+                        hotspotList.AddRange(strArray);
+                    }
+                }
+                var info = new PictureInfo(myloc, imgTitle, imgUri);
+                info.Hotspot = hotspotList;
+                AllDownloadedPictures[SelectedDay].Add(info);
+            }
+
+            Debug.WriteLine("AllDownloadedPictures[SelectedDay].Count:" + AllDownloadedPictures[SelectedDay].Count);
+
+            SetProgress();
         }
 
         private static void SetProgress()
         {
-
+            HttpTimesToRequest--;
+            bool finish = HttpTimesToRequest == 0;
+            if (finish)
+            {
+                IsDownloading = false;
+            }
+            OnGetOneDayWallpapersProgressEventHandler(new ProgressEventArgs
+            {
+                IsException = false,
+                IsComplete = finish,
+                ExceptionInfo = "",
+                ProgressValue = (int) (((float) (HttpTimesTotal - HttpTimesToRequest)/(float) HttpTimesTotal)*100),
+                Pictures = AllDownloadedPictures[SelectedDay]
+            });
         }
     }
 }
