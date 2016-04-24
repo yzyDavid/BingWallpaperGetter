@@ -22,20 +22,37 @@
             <Grid.Background>
                 <ImageBrush>
                     <ImageBrush.ImageSource>
-                        <BitmapImage x:Name ="Background"/>
+                        <BitmapImage x:Name ="BackgroundImage"/>
                     </ImageBrush.ImageSource>
                 </ImageBrush>
             </Grid.Background>
         </Grid>
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,28">
-            <TextBlock Text="Bing Wallpaper" FontSize="20"/>
+            <TextBlock Text="Bing Wallpaper" FontSize="20" Foreground="Aqua" Style="{StaticResource TitleTextBlockStyle}"/>
         </StackPanel>
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel VerticalAlignment="Bottom">
                 <HyperlinkButton Content="Today Wallpaper" x:Name="TodayButton" Click="TodayButton_OnClick" />
                 <HyperlinkButton Content="Yesterday Wallpaper" x:Name="YesterdayButton" Click="YesterdayButton_OnClick" />
+                <HyperlinkButton Content="TwoDaysBefore" x:Name="TwodaysButton" Click="TwodaysButton_OnClick" />
+                <HyperlinkButton Content="ThreeDaysBefore" x:Name="ThreedaysBefore" Click="ThreedaysBefore_OnClick" />
+                <HyperlinkButton Content="Earlier Wallpaper" x:Name="EarlierButton" Click="EarlierButton_OnClick"></HyperlinkButton>
             </StackPanel>
         </Grid>
+        <StackPanel Orientation="Vertical" Grid.RowSpan="2" x:Name="TopStackPanel"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="300" VerticalAlignment="Top">
+            <StackPanel.RenderTransform>
+                <TranslateTransform x:Name="TopTransform" Y="-300"/>
+            </StackPanel.RenderTransform>
+            <TextBlock Text="Select Time:" Margin="12,30,0,0" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Margin="12,30,0,0">
+                <AppBarButton Icon="Remove" IsCompact="True" x:Name="MinusBar" Click="MinusBar_OnClick" VerticalAlignment="Center"/>
+                <TextBlock Text="4" x:Name="DayNumberBlock" Margin="20,0,20,0" FontSize="20" VerticalAlignment="Center"/>
+                <AppBarButton Icon="Add" IsCompact="True" x:Name="PlusBar" Click="PlusBar_OnClick" VerticalAlignment="Center"/>
+                <TextBlock Text="Day(s) before" VerticalAlignment="Center" Margin="24,0,0,0"/>
+            </StackPanel>
+            <Button Content="View this Wallpaper" x:Name="GoButton" Margin="20,30,0,0" Click="GoButton_OnClick"></Button>
+        </StackPanel>
     </Grid>
 
 </Page>

@@ -30,6 +30,34 @@ namespace BingWallpaperGetter
 
         private void TodayButton_OnClick(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void YesterdayButton_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void TwodaysButton_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ThreedaysBefore_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void EarlierButton_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void MinusBar_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void PlusBar_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void GoButton_OnClick(object sender, RoutedEventArgs e)
+        {
             throw new NotImplementedException();
         }
     }
