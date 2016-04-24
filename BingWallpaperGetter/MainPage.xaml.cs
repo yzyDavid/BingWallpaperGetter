@@ -27,5 +27,10 @@ namespace BingWallpaperGetter
         {
             this.InitializeComponent();
         }
+
+        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
