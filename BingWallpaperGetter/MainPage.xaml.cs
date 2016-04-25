@@ -28,9 +28,19 @@ namespace BingWallpaperGetter
             this.InitializeComponent();
         }
 
-        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
-        {
-        }
+        /// <summary>
+        /// ?????
+        /// </summary>
+        /// <param name="e"></param>
+//        protected override void OnNavigatedTo(NavigationEventArgs e)
+//        {
+//            Background.UriSource = new Uri(TodayPictureUri);
+//        }
+//
+//        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
+//        {
+//            Frame.Navigate(typeof (DayPicturePage), 0);
+//        }
 
         private void YesterdayButton_OnClick(object sender, RoutedEventArgs e)
         {

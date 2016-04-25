@@ -14,10 +14,12 @@
     </Page.Resources>
 
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Grid Opacity ="0.5" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush>
@@ -27,9 +29,11 @@
                 </ImageBrush>
             </Grid.Background>
         </Grid>
+
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,28">
             <TextBlock Text="Bing Wallpaper" FontSize="20" Foreground="Aqua" Style="{StaticResource TitleTextBlockStyle}"/>
         </StackPanel>
+
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel VerticalAlignment="Bottom">
                 <HyperlinkButton Content="Today Wallpaper" x:Name="TodayButton" Click="TodayButton_OnClick" />
@@ -39,6 +43,7 @@
                 <HyperlinkButton Content="Earlier Wallpaper" x:Name="EarlierButton" Click="EarlierButton_OnClick"></HyperlinkButton>
             </StackPanel>
         </Grid>
+
         <StackPanel Orientation="Vertical" Grid.RowSpan="2" x:Name="TopStackPanel"
                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="300" VerticalAlignment="Top">
             <StackPanel.RenderTransform>
@@ -53,6 +58,7 @@
             </StackPanel>
             <Button Content="View this Wallpaper" x:Name="GoButton" Margin="20,30,0,0" Click="GoButton_OnClick"></Button>
         </StackPanel>
+
     </Grid>
 
 </Page>
