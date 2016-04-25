@@ -23,6 +23,8 @@ namespace BingWallpaperGetter
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private static string TodayPictureUri = "http://appserver.m.bing.net/BackgroundImageService/TodayImageService.svc/GetTodayImage?dateOffset=-0&urlEncodeHeaders=true&osName=windowsphone&osVersion=8.10&prientation=480x800&deviceName=WP8Device&mkt=zh-CN";
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -32,15 +34,15 @@ namespace BingWallpaperGetter
         /// ?????
         /// </summary>
         /// <param name="e"></param>
-//        protected override void OnNavigatedTo(NavigationEventArgs e)
-//        {
-//            Background.UriSource = new Uri(TodayPictureUri);
-//        }
-//
-//        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
-//        {
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            BackgroundImage.UriSource = new Uri(TodayPictureUri);
+        }
+
+        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
+        {
 //            Frame.Navigate(typeof (DayPicturePage), 0);
-//        }
+        }
 
         private void YesterdayButton_OnClick(object sender, RoutedEventArgs e)
         {
