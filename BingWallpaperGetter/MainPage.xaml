@@ -59,20 +59,20 @@
             <Button Content="View this Wallpaper" x:Name="GoButton" Margin="20,30,0,0" Click="GoButton_OnClick"></Button>
         </StackPanel>
 
-    </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="SideBySideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TopStackPanel.Orientation" Value="Horizonal" />
+                        <Setter Target="TopStackPanel.Height" Value="150" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup>
-            <VisualState x:Name="SideBySideState">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="600" />
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <Setter Target="TopStackPanel.Orientation" Value="Horizonal" />
-                    <Setter Target="TopStackPanel.Height" Value="150" />
-                </VisualState.Setters>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
+    </Grid>
 
 </Page>

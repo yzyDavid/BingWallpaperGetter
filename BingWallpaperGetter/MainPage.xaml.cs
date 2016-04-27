@@ -25,9 +25,24 @@ namespace BingWallpaperGetter
     {
         private static string TodayPictureUri = "http://appserver.m.bing.net/BackgroundImageService/TodayImageService.svc/GetTodayImage?dateOffset=-0&urlEncodeHeaders=true&osName=windowsphone&osVersion=8.10&prientation=480x800&deviceName=WP8Device&mkt=zh-CN";
 
+        private static string TodayPictureUriBig = "";
+
         public MainPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width <= 500)
+            {
+                BackgroundImage.UriSource = new Uri(TodayPictureUri);
+            }
+            else
+            {
+                BackgroundImage.UriSource=new Uri(TodayPictureUriBig);
+            }
         }
 
         /// <summary>
