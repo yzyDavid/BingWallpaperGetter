@@ -22,5 +22,15 @@ namespace BingWallpaperGetter
         {
             throw new System.NotImplementedException();
         }
+
+        private void ViewButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
